@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'SalonSigoApp/css/addSigning.css' %}">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script defer src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script defer src="{% static 'SalonSigoApp/js/addSigning.js' %}"></script>
+    <title>Добавить запись</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'magazine' %}">SIGO</a>
+    </header>
+    <main>
+        <form novalidate action="{% url 'addSigning' %}">
+            {% csrf_token %}
+
+            <div class="inputs">
+                <label for="namePeopleChoice">Имя клиента:</label>
+                <input type="text" id="namePeopleChoice" name="namePeople" >
+                
+                <label for="procedureChoice">Процедура:</label>
+                <input type="text" list="procedureList" id="procedureChoice" name="procedure" >
+                <datalist id="procedureList">
+                    {% for proc in procedure %}
+                        <option>{{ proc.name }}</option>
+                    {% endfor %}
+                </datalist>
+    
+                <label for="dateChoice">День:</label>
+                <input type="date" id="dateChoice" name="date" >
+    
+                <label for="timeChoice">Время:</label>
+                <input type="time" id="timeChoice" name="time" >
+            </div>
+            
+
+            <button>Записать</button>
+        </form>
+
+        <div class="modal-window">
+            <h2 class="modal-title">Неверный ввод данных</h2>
+            <p class="modal-text">Заполните пустое поле</p>
+        </div>
+    </main>
+</body>
+</html>

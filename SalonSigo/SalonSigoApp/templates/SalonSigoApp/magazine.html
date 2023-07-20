@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'SalonSigoApp/css/magazine.css' %}">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script defer src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script defer src="{% static 'SalonSigoApp/js/magazine.js' %}"></script>
+    <title>Журнал</title>
+</head>
+<body>
+    <header>
+        <input type="hidden" value="{{ master }}" id = "masterName">
+        <h1>SIGO</h1>
+        <img src="{% static 'SalonSigoApp/img/select-arrow.png' %}" alt="" class="sellect-arrow">
+    </header>
+    <div class="date">
+        <img src="{% static 'SalonSigoApp/img/left-arrow.png' %}" alt="" class="arrow leftArrow">
+        <div class="select-date">
+            <img src="{% static 'SalonSigoApp/img/calendar.png' %}" alt="" class="calendar">
+            <h2 id="dateScreen"></h2>
+        </div>
+        <img src="{% static 'SalonSigoApp/img/right-arrow.png' %}" alt="" class="arrow righttArrow">
+    </div>
+    <main id="main">
+        {% for sign in signings %}
+            <div class="item">
+                <div class="first-block">
+                    <div>
+                        <img src="{% static 'SalonSigoApp/img/human.png' %}" alt="">
+                        <p>{{ sign.people_name }}</p>
+                    </div>
+                    <div>
+                        <img src="{{ sign.procedure.image.url }}" alt=" ">
+                        <p>{{ sign.procedure.name }}</p>
+                    </div>
+                </div>
+                <div class="second-block">
+                    <div>
+                        <img src="{% static 'SalonSigoApp/img/time.png' %}" alt="">
+                        <p>{{ sign.time }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </main>
+    
+    <div class="modal-window modal-date">
+        <h2>День:</h2>
+        <div class="date-input">
+            <img src="{% static 'SalonSigoApp/img/left-arrow.png' %}" alt="" class="arrow leftArrow">
+            <input id="inputDate" type="date">
+            <img src="{% static 'SalonSigoApp/img/right-arrow.png' %}" alt="" class="arrow righttArrow">
+        </div>
+    </div>
+
+    <form action="{% url 'magazine' %}" class="modal-window select-master">
+        {% csrf_token %}
+        <div>
+            <input type="radio" id="masterChoice1" class="masterSelect" name="master" >
+            <label for="masterChoice1">Яна</label>
+        </div>
+        <div>
+            <input type="radio" id="masterChoice2" class="masterSelect" name="master" >
+            <label for="masterChoice2">Ирина</label>
+        </div>
+        <div>
+            <input type="radio" id="masterChoice3" class="masterSelect" name="master" >
+            <label for="masterChoice3">Анастасия</label>
+        </div>
+    </form>
+
+    <a href="{% url 'addSigning' %}" class="add-link">
+        <img src="{% static 'SalonSigoApp/img/add-signing.png' %}" alt="">
+    </a>
+    
+
+</body>
+</html>

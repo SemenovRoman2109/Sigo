@@ -1,0 +1,22 @@
+{% load static %}
+
+{% for sign in signings %}
+    <div class="item">
+        <div class="first-block">
+            <div>
+                <img src="{% static 'SalonSigoApp/img/human.png' %}" alt="">
+                <p>{{ sign.people_name }}</p>
+            </div>
+            <div>
+                <img src="{{ sign.procedure.image.url }}" alt=" ">
+                <p>{{ sign.procedure.name }}</p>
+            </div>
+        </div>
+        <div class="second-block">
+            <div>
+                <img src="{% static 'SalonSigoApp/img/time.png' %}" alt="">
+                <p>{{ sign.time }}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'SalonSigoApp/css/addSigning.css' %}">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script defer src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script defer src="{% static 'SalonSigoApp/js/login.js' %}"></script>
+    <title>Вход</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'magazine' %}">SIGO</a>
+    </header>
+    <main>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="inputs">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" >
+    
+                <label for="passwordChoice">Пароль:</label>
+                <input type="text" id="passwordChoice" name="password">
+            </div>
+            
+            <button>Войти</button>
+        </form>
+
+        <div class="modal-window">
+            <h2 class="modal-title">Заполните пустое поле</h2>
+        </div>
+    </main>
+</body>
+</html>
