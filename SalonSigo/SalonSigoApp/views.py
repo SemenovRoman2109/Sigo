@@ -37,7 +37,7 @@ master_id = 2
 def show_magazine(request):
     
     global master_id
-    context = {}
+    context = {"is_aunt":request.user.is_authenticated}
     
     if "master_name" not in request.COOKIES:
         context["signings"] = Signing.objects.all()
@@ -64,35 +64,44 @@ def show_magazine(request):
         response.set_cookie("master_name","2")
     else:
         response.set_cookie("master_name",master_id)
+
+
     if request.method == "POST":
-        master_name = str(request.POST.get("master_name"))
-        date = str(request.POST.get("date"))
-            
-        if master_name == 'None':
-            master_name = list_master[master_id]
+        del_elem =  request.POST.get("del") 
+
+        if del_elem == "T":
+            sign_id = request.POST.get("sign_id") 
+            sign_del = Signing.objects.get(pk = sign_id)
+            sign_del.delete()
         else:
-            master_id = list_master.index(master_name)
+            master_name = str(request.POST.get("master_name"))
+            date = str(request.POST.get("date"))
 
-        all_signings = Signing.objects.all()
-        signings_master = []
-        signings = []
-        for s in all_signings:
-            if Procedure.objects.filter(id = s.procedure_id)[0].master_name == master_name:
-                signings_master.append(s)
-        
-        for s in signings_master:
-            if str(s.date) == date:
-                signings.append(s) 
-        
-        signings = sort_sign(signings)
+            if master_name == 'None':
+                master_name = list_master[master_id]
+            else:
+                master_id = list_master.index(master_name)
 
-        data = {
-            'html_sign_list': render_to_string( "SalonSigoApp/list_item.html",{ 
-                'signings': signings
-            })
-        }
-        
-        return JsonResponse(data)
+            all_signings = Signing.objects.all()
+            signings_master = []
+            signings = []
+            for s in all_signings:
+                if Procedure.objects.filter(id = s.procedure_id)[0].master_name == master_name:
+                    signings_master.append(s)
+
+            for s in signings_master:
+                if str(s.date) == date:
+                    signings.append(s) 
+
+            signings = sort_sign(signings)
+
+            data = {
+                'html_sign_list': render_to_string( "SalonSigoApp/list_item.html",{ 
+                    'signings': signings
+                })
+            }
+
+            return JsonResponse(data)
     
     return response
 

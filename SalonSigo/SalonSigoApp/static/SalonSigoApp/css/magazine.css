@@ -80,7 +80,7 @@ header h1{
     color: #4D4D4D;
     text-align: center;
     font-family: "Times New Roman";
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -323,4 +323,48 @@ input[type='radio'] {
 
 .add-link img{
     width: 100%;
+}
+
+
+.delete-item{
+
+    z-index: 71;
+    background-color: #CCCCCC;
+    border-radius: 20px;
+    width: 280px;
+    height: 120px;
+    position: absolute;
+    left: calc(50% - 140px);
+    top: calc(50% - 60px);
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    
+}
+
+
+.delete-item .select-delete{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 30%;
+    width: 90%;
+}
+
+.delete-item .select-delete p{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Times New Roman";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #333333;
+    height: 100%;
+    width: 35%;
+    border-radius: 10px;
+    border: #333333 solid 2px;
+    transition: all 0.2s;
 }

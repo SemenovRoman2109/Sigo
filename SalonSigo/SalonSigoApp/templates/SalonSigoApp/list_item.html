@@ -2,6 +2,7 @@
 
 {% for sign in signings %}
     <div class="item">
+        <input type="hidden" class="sign-id" value="{{ sign.pk }}">
         <div class="first-block">
             <div>
                 <img src="{% static 'SalonSigoApp/img/human.png' %}" alt="">

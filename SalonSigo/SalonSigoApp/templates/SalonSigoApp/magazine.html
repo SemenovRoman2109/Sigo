@@ -15,6 +15,7 @@
     <header>
         <input type="hidden" value="{{ master }}" id = "masterName">
         <h1>SIGO</h1>
+        <input type="hidden" class="is_aunt" value="{{ is_aunt }}">
         <img src="{% static 'SalonSigoApp/img/select-arrow.png' %}" alt="" class="sellect-arrow">
     </header>
     <div class="date">
@@ -28,6 +29,7 @@
     <main id="main">
         {% for sign in signings %}
             <div class="item">
+                <input type="hidden" class="sign-id" value="{{ sign.pk }}">
                 <div class="first-block">
                     <div>
                         <img src="{% static 'SalonSigoApp/img/human.png' %}" alt="">
@@ -54,6 +56,14 @@
             <img src="{% static 'SalonSigoApp/img/left-arrow.png' %}" alt="" class="arrow leftArrow">
             <input id="inputDate" type="date">
             <img src="{% static 'SalonSigoApp/img/right-arrow.png' %}" alt="" class="arrow righttArrow">
+        </div>
+    </div>
+
+    <div class="modal-window delete-item">
+        <h2>Удалить запись</h2>
+        <div class="select-delete">
+            <p id="yes">Да</p>
+            <p id="no">Нет</p>
         </div>
     </div>
 
